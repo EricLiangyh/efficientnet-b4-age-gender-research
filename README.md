@@ -38,7 +38,16 @@ The objective is `L = L1(age) + 6 × CrossEntropy(gender, label_smoothing=0.1)`.
 
 These values come from archived CSV validation logs, **not a fresh evaluation or independently verified test benchmark**. The original sample-level split manifest was not retained. The selected C3 checkpoint is different from another same-named historical full-data checkpoint. See [provenance](docs/provenance.md) before comparing results.
 
-![Historical validation curves](experiments/figures/validation_curves.png)
+## Experiment progression
+
+1. **Backbone selection (15 epochs):** EfficientNet-B4 vs ResNet-50 vs VGG-16.
+2. **EfficientNet scaling (15 epochs):** B4 vs B0.
+3. **Training settings (15 epochs each):** augmentation, loss weighting and alignment, each in its own figure.
+4. **Final training (35 epochs):** the selected B4 configuration, shown separately.
+
+[View grouped comparison figures and tables](docs/experiments.md)
+
+![Final EfficientNet-B4 training](experiments/figures/final_training_35.png)
 
 ## Quick start
 
