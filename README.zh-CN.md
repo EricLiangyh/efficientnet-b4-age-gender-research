@@ -4,6 +4,15 @@
 
 本项目研究共享 EfficientNet-B4 骨干下的年龄回归与性别标签分类，围绕多源数据融合、人脸几何预处理、复合数据增强与多任务损失加权开展实验。仓库集中呈现模型、训练方法与实验依据。
 
+## 原始预处理与训练代码
+
+你提供的两个原始脚本已按原名放在仓库根目录，**完整保留，未改动任何内容**：
+
+- [`preprocess_pro.py`](preprocess_pro.py)：扫描 UTKFace、AFAD 与 IMDB 数据，使用 InsightFace 106 点关键点进行旋转对齐、外扩裁剪并导出图片。
+- [`train_pro.py`](train_pro.py)：定义 EfficientNet-B4 年龄/性别双分支模型，读取对齐数据，执行数据增强和 35 轮训练。
+
+[文件校验记录](docs/original_scripts.json)保存原文件的大小与 SHA256。脚本保留原来的 Linux 路径和 CUDA 设置；运行前需要在工作副本中调整。原始训练脚本未划分独立验证集，与 C3 实验及 `age_gender/` 新代码分别保存，不能混用其结果来源。详见[原始工作流程](docs/original-workflow.md)。
+
 ## 研究内容
 
 - **模型结构**：ImageNet 预训练 EfficientNet-B4，1792 维共享特征，分别连接年龄回归头和二分类头。

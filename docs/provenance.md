@@ -14,6 +14,10 @@ The historical evaluation script selects 20% from the full data directory. Appli
 
 The 20% partition was used during training to monitor validation metrics. It should be described as validation, not a final untouched test set. Identity overlap, exact/near duplicates and identity-level leakage were not resolved by image-level random splitting.
 
+## Verbatim original source files
+
+Root-level `preprocess_pro.py` and `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these root-level originals. They are separate from the renamed archive and from the unified new package.
+
 ## Archived versus new implementation
 
 Archived scripts preserve the original experimental behavior, including absolute Linux paths, recursive bad-image replacement, unsorted enumeration and the original geometric crop logic. Wording-only substitutions removed document-specific presentation terminology; filenames were changed to describe each experiment. The archive is evidence, not the recommended executable API.

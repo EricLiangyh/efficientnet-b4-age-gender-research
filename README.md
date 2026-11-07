@@ -8,6 +8,15 @@ This research repository studies a shared EfficientNet-B4 backbone with separate
 
 The work focuses on **model training, backbone comparisons and ablation experiments**. A web application is outside this repository's scope.
 
+## Original preprocessing and training scripts
+
+The two supplied original scripts are included **in full, unchanged, under their original filenames at the repository root**:
+
+- [`preprocess_pro.py`](preprocess_pro.py): UTKFace/AFAD/IMDB input scanning, InsightFace 106-landmark alignment, expanded face crops and image export.
+- [`train_pro.py`](train_pro.py): EfficientNet-B4 dual-head architecture, aligned dataset loading, augmentation and the 35-epoch training loop.
+
+Original-file checksums are recorded in [original_scripts.json](docs/original_scripts.json). These scripts retain their original Linux paths and CUDA assumptions. Adjust paths on a working copy before running. The original training script uses all merged samples without a held-out split; it is distinct from the archived C3 split-based run and the newer `age_gender/` pipeline. See [original workflow](docs/original-workflow.md).
+
 ## Research questions
 
 - How does EfficientNet-B4 compare with B0, ResNet-50 and VGG-16 under the archived experimental settings?
