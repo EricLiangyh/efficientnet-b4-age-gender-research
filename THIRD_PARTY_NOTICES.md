@@ -18,4 +18,4 @@ The selected age/gender checkpoint is a research artifact trained using third-pa
 
 ## Authorized demonstration photograph
 
-`weights/example_face.png` was supplied by the project owner, who explicitly confirmed permission to use the photograph for this repository. It is preserved unchanged and is included as an input-preparation reference. No general redistribution license is granted to visitors by this permission; no endorsement or model-accuracy claim is implied. This photograph is separate from the training datasets.
+`weights/example_face.jpg` was supplied by the project owner, who explicitly confirmed permission to use the photograph for this repository. It is preserved unchanged and is included as an input-preparation reference. No general redistribution license is granted to visitors by this permission; no endorsement or model-accuracy claim is implied. This photograph is separate from the training datasets.

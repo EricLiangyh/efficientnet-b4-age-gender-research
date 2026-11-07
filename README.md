@@ -81,7 +81,7 @@ On Linux/macOS replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. For
 
 ### Authorized photograph example
 
-<img src="weights/example_face.png" alt="User-authorized example photograph, original uncropped image" width="180" />
+<img src="weights/example_face.jpg" alt="User-authorized example photograph, original uncropped image" width="180" />
 
 This photograph was supplied by the project owner with permission to display it in this repository. The original image is preserved unchanged. It includes the upper body and background: crop a single complete face with a small forehead/chin margin before inference, and save your working crop locally as `face_crop.jpg`. Resizing to 380×380 is automatic.
 

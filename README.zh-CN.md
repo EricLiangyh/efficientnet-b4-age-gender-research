@@ -81,7 +81,7 @@ Linux/macOS 将 `.\.venv\Scripts\python.exe` 换为 `.venv/bin/python`。使用 
 
 ### 已授权的照片示例
 
-<img src="weights/example_face.png" alt="用户授权展示的示例照片，保留未裁剪原图" width="180" />
+<img src="weights/example_face.jpg" alt="用户授权展示的示例照片，保留未裁剪原图" width="180" />
 
 照片由项目所有者提供，并已确认可用于本仓库展示；文件保持原样，未修改人物或图像内容。原图包含上半身和背景，推理前需裁出一张完整人脸，保留少量额头、下巴边缘，将工作副本保存为本地 `face_crop.jpg`。不必手动缩放到 380×380。
 
