@@ -52,7 +52,6 @@ train_pro.py             Original training
 predict.py               Minimal checkpoint inference
 weights/                 Selected trained model and checksums
 experiments/             Historical scripts, eight logs and six figures
-scripts/plot_results.py  Regenerate figures directly from CSV logs
 docs/                    Method, model card, results and provenance
 ```
 

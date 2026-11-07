@@ -22,6 +22,6 @@ Root-level `preprocess_pro.py` and `train_pro.py` preserve the two supplied file
 
 Historical comparison scripts preserve original experimental behavior, including Linux paths, recursive bad-image replacement and unsorted enumeration. Their filenames and some comments were adjusted during archiving. The root original scripts remain byte-for-byte unchanged.
 
-The repository keeps only two supporting utilities: `predict.py` loads the selected B4 checkpoint for cropped-face inference, and `scripts/plot_results.py` regenerates figures from CSV evidence. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
+The only standalone supporting utility is `predict.py`, which loads the selected B4 checkpoint for cropped-face inference. Existing figures are retained alongside their source CSV logs; no standalone plotting script is included. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
 
 No original dataset or split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.

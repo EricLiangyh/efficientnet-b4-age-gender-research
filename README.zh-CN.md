@@ -50,7 +50,6 @@ train_pro.py             原始模型训练
 predict.py               单文件推理入口
 weights/                 已训练模型和校验信息
 experiments/             历史实验脚本、八组日志、六张图
-scripts/plot_results.py  从 CSV 重新生成实验图
 docs/                    方法、模型卡、结果与来源说明
 ```
 
