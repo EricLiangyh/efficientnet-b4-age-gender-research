@@ -1,30 +1,20 @@
-# experiments：模型选择与调参的实验依据
+# 实验索引
 
-[返回首页](../README.md) · [按研究步骤看图表](../docs/experiments.md) · [如何开展新调参实验](../docs/tuning.md)
+[返回首页](../README.md) · [分组图表与结果](../docs/experiments.md) · [参数解释](../docs/methodology.md)
 
-读完原始预处理、训练代码和权重后，可以在这里深入了解“为什么选 B4、为什么使用这些训练策略”。
+这里仅保存支撑研究结果的历史脚本、八组逐轮日志与六张图。`legacy/` 为历史实现，`logs/` 为对应 CSV，`figures/` 为日志生成的图。
 
-## 推荐阅读顺序
-
-| 顺序 | 问题 | 历史脚本 | 历史记录 |
-| --- | --- | --- | --- |
-| 1 | B4、ResNet-50、VGG-16 选择哪个 | [脚本导航](legacy/README.md) 中的三组 15 轮实验 | `logs/b4_15.csv`、`resnet50_15.csv`、`vgg16_15.csv` |
-| 2 | EfficientNet 选择 B4 还是 B0 | B4/B0 两组 15 轮实验 | `logs/b4_15.csv`、`b0_15.csv` |
-| 3 | 增强、任务权重、对齐的影响 | 三类消融分别比较 | `logs/b4_no_augmentation_15.csv`、`b4_gender_weight_1_15.csv`、`b4_no_alignment_15.csv` |
-| 4 | 最终模型训练过程怎样 | [b4_35.py](legacy/b4_35.py) | [完整 35 轮日志](logs/b4_35.csv) |
-
-每组比较的图与末轮结果表统一在 [实验结果页](../docs/experiments.md)。这是按研究问题组织的阅读顺序，不表示已经证明原实验的实际执行时间顺序。
-
-## 各目录和汇总文件做什么
-
-| 位置 | 内容 | 怎样使用 |
+| 阶段 | 代码 | 日志 |
 | --- | --- | --- |
-| [legacy/](legacy/README.md) | 历史训练及辅助脚本 | 核对历史方法和参数；脚本有原环境路径，不能默认直接运行 |
-| [logs/](logs/README.md) | 八组逐轮 CSV 日志 | 查看训练损失、验证误差与分类准确率 |
-| [figures/](figures/README.md) | 从上述 CSV 生成的六张图 | 每张图只回答一组研究问题 |
-| [summary.json](summary.json) | 绘图程序生成的各实验最后一轮摘要 | 用于读取汇总；它不是额外一组测量 |
-| [historical_results.json](historical_results.json) | 初次整理保留的历史末轮记录及来源 | 作为辅助来源索引，不是独立测试结果 |
+| B4 基线，15 轮 | [b4_15.py](legacy/b4_15.py) | [CSV](logs/b4_15.csv) |
+| ResNet-50，15 轮 | [resnet50_15.py](legacy/resnet50_15.py) | [CSV](logs/resnet50_15.csv) |
+| VGG-16，15 轮 | [vgg16_15.py](legacy/vgg16_15.py) | [CSV](logs/vgg16_15.csv) |
+| B0，15 轮 | [b0_15.py](legacy/b0_15.py) | [CSV](logs/b0_15.csv) |
+| 无增强，15 轮 | [b4_no_augmentation_15.py](legacy/b4_no_augmentation_15.py) | [CSV](logs/b4_no_augmentation_15.csv) |
+| 性别损失权重 1，15 轮 | [b4_gender_weight_1_15.py](legacy/b4_gender_weight_1_15.py) | [CSV](logs/b4_gender_weight_1_15.csv) |
+| 无对齐，15 轮 | [b4_no_alignment_15.py](legacy/b4_no_alignment_15.py)、[数据处理](legacy/preprocess_no_alignment.py) | [CSV](logs/b4_no_alignment_15.csv) |
+| 最终 C3，35 轮 | [b4_35.py](legacy/b4_35.py) | [CSV](logs/b4_35.csv) |
 
-重画图表：从仓库根目录运行 `python -m age_gender.plot_results`。不要手动修改图中的数值来替代真实日志。
+日志中 `train_loss`/`val_loss` 为联合损失，`val_mae` 单位为岁，`val_acc` 为百分比。末轮结果不必然是最佳轮；不同任务权重下的联合损失也不能直接等价比较。
 
-历史日志记录的是验证过程，不应自动称为独立测试成绩。数据成员划分和版本限制详见 [来源说明](../docs/provenance.md)。
+从仓库根目录运行 `python scripts/plot_results.py` 可重画全部分组图并更新结果页，需要 Matplotlib。图表不平滑、不修改测量数值。历史脚本保留原环境路径和行为，文件名及部分注释经过整理；根目录两个原件则逐字节保留。

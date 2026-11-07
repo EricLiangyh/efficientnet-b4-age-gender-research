@@ -1,6 +1,5 @@
 """Generate focused research-stage figures directly from historical CSV logs."""
 import csv
-import json
 from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
@@ -72,13 +71,11 @@ def final_training(rows, destination):
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    histories, records = {}, []
+    histories = {}
     for path in sorted((root / "experiments/logs").glob("*.csv")):
         with path.open(encoding="utf-8-sig") as stream:
             rows = list(csv.DictReader(stream))
         histories[path.stem] = rows
-        last = rows[-1]
-        records.append({"run": path.stem, "epochs": int(last["epoch"]), "val_mae_years": float(last["val_mae"]), "val_accuracy_percent": float(last["val_acc"]), "source": path.relative_to(root).as_posix()})
     destination = root / "experiments/figures"
     destination.mkdir(exist_ok=True)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
@@ -93,7 +90,6 @@ def main():
     final_training(histories["b4_35"], destination)
     sections += ["## 4. Final training: selected EfficientNet-B4 configuration", "", "The final figure uses the complete 35-epoch C3 record. It separates training/validation joint loss, validation age MAE and validation gender accuracy. It is not mixed with the 15-epoch comparisons.", "", "![Final training](../experiments/figures/final_training_35.png)", "", "[Final-run CSV](../experiments/logs/b4_35.csv) · [Provenance and comparison limitations](provenance.md)", "", "Archived runs do not establish fully controlled comparisons or statistical significance. Original split membership is unavailable; preprocessing and architecture details should be audited before drawing causal conclusions."]
     (root / "docs/experiments.md").write_text("\n".join(sections) + "\n", encoding="utf-8")
-    (root / "experiments/summary.json").write_text(json.dumps(records, indent=2) + "\n", encoding="utf-8")
     print("Generated 6 focused figures from 8 historical CSV logs")
 
 

@@ -16,14 +16,12 @@ The 20% partition was used during training to monitor validation metrics. It sho
 
 ## Verbatim original source files
 
-Root-level `preprocess_pro.py` and `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these root-level originals. They are separate from the renamed archive and from the unified new package.
+Root-level `preprocess_pro.py` and `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these root-level originals. They are separate from the renamed historical archive.
 
-## Archived versus new implementation
+## Archived scripts and minimal utilities
 
-Archived scripts preserve the original experimental behavior, including absolute Linux paths, recursive bad-image replacement, unsorted enumeration and the original geometric crop logic. Wording-only substitutions removed document-specific presentation terminology; filenames were changed to describe each experiment. The archive is evidence, not the recommended executable API.
+Historical comparison scripts preserve original experimental behavior, including Linux paths, recursive bad-image replacement and unsorted enumeration. Their filenames and some comments were adjusted during archiving. The root original scripts remain byte-for-byte unchanged.
 
-The new package is a maintainable implementation of the research approach. It saves sorted, hash-grouped sample manifests; fails explicitly on invalid images/labels; separates three splits; stores configuration and manifest hashes; loads weights without redundant downloads; and uses safe weights-only deserialization for attribute checkpoints. CPU execution disables CUDA AMP. These changes mean new results must be reported separately from historical logs.
+The repository keeps only two supporting utilities: `predict.py` loads the selected B4 checkpoint for cropped-face inference, and `scripts/plot_results.py` regenerates figures from CSV evidence. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
 
-The new alignment utility uses the detector's five-point eye landmarks and transforms the bounding-box corners with the image before cropping. The old utility uses 106-point indices and crops the rotated image using the original box. New preprocessing output will differ. Do not attach historical performance to this revised preprocessing without running an experiment.
-
-No original dataset or original split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.
+No original dataset or split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.

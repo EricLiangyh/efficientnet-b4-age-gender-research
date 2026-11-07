@@ -1,30 +1,23 @@
-# 模型权重与使用 / Selected model weights
+# 已训练模型 / Trained model
 
-## 先看这里：这个目录里是什么
+[返回首页](../README.md) · [模型卡](../docs/model-card.md) · [来源说明](../docs/provenance.md)
 
 | 文件 | 用途 |
 | --- | --- |
-| [efficientnet_b4_c3_epoch35.pth](efficientnet_b4_c3_epoch35.pth) | 已训练的 C3 B4 模型参数，约 71 MB；它是二进制权重，不是 Python 源代码 |
-| [manifest.json](manifest.json) | 选定权重的文件大小、SHA256，以及另一历史权重的区别记录 |
+| [efficientnet_b4_c3_epoch35.pth](efficientnet_b4_c3_epoch35.pth) | 选定的 C3 第 35 轮 B4 参数，约 71 MB |
+| [manifest.json](manifest.json) | 文件大小、SHA256，以及另一历史权重的区别 |
 
-权重包含模型参数，使用时仍需要 [模型结构代码](../age_gender/model.py)。它按来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [C3 日志](../experiments/logs/b4_35.csv)，不能直接当成根目录全数据 `train_pro.py` 的输出。
+权重按目录来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [日志](../experiments/logs/b4_35.csv)。根目录全数据 `train_pro.py` 是另一版本，不能直接认定为本权重的生成代码。
 
-### 用现有模型预测一张图片
-
-安装项目依赖后，从仓库根目录运行：
+在仓库根目录执行：
 
 ```powershell
-python -m age_gender.predict --image path/to/face_crop.jpg --checkpoint weights/efficientnet_b4_c3_epoch35.pth --device cpu
+python -m pip install -r requirements.txt
+python predict.py --image path/to/face_crop.jpg --device cpu
 ```
 
-输入必须是已裁剪的人脸图片，不是让该命令自动在多人照片中检测人脸。输出包含年龄估计、二元数据集标签与未经校准的类别概率。单张预测不需要真实标签，也不会衡量准确率。
+输入为已裁剪的人脸图片；没有人脸检测环节。输出为年龄估计、0/1 分类标签和未经校准的类别概率。单张预测不衡量准确率。
 
-若要对一组有真实标签的图片评估 MAE、准确率等，请先看 [评估指南](../docs/evaluation.md)。历史权重缺少原始划分清单，需要按指南明确处理其来源限制。
+`predict.py` 仅定义加载这份权重所需的 B4 结构，以 `weights_only=True` 严格加载参数，不额外下载 ImageNet 权重。它不是另一套训练实现。
 
-[返回首页](../README.md) · [第一次阅读路线](../docs/reading-guide.md) · [代码导航](../age_gender/README.md)
-
-`efficientnet_b4_c3_epoch35.pth` is the 35-epoch C3 EfficientNet-B4 state dictionary. It is versioned in this private repository and loads with `weights_only=True` and strict keys. Byte size and SHA256 are in [manifest.json](manifest.json).
-
-The manifest also identifies a different historical full-data checkpoint that is deliberately not included. The chosen checkpoint is paired with its folder's training code and CSV log; those artifacts do not establish independent test accuracy. See [model card](../docs/model-card.md) and [provenance](../docs/provenance.md).
-
-No weight license has been selected. Original dataset and pretraining terms apply separately. No detector or web application is needed for the cropped-face prediction command.
+No project-wide license is selected. Dataset and pretraining terms apply separately. Successful loading and finite outputs do not establish accuracy on unseen data.

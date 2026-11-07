@@ -1,2 +1,5 @@
-# Install the core research package from the repository root.
--e .
+# Minimal cropped-face inference. Choose a CPU/CUDA-compatible PyTorch build.
+torch>=2.3
+torchvision>=0.18
+Pillow>=10
+# Original training/preprocessing and plotting dependencies: docs/methodology.md
