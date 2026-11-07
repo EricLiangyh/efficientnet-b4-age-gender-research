@@ -16,6 +16,6 @@ Consult each original source before downloading or using data/models. InsightFac
 
 The selected age/gender checkpoint is a research artifact trained using third-party data and ImageNet initialization. Its presence in this private repository does not grant any additional license. File integrity and source mapping are in `weights/manifest.json` and `docs/provenance.md`.
 
-## Included demonstration asset
+## Authorized demonstration photograph
 
-`weights/example_face.png` was drawn from simple geometric shapes for this repository. It is fictional and is not derived from a photograph or a dataset. Its inference output is an interface demonstration, not labelled evaluation evidence. No additional third-party photograph is included.
+`weights/example_face.png` was supplied by the project owner, who explicitly confirmed permission to use the photograph for this repository. It is preserved unchanged and is included as an input-preparation reference. No general redistribution license is granted to visitors by this permission; no endorsement or model-accuracy claim is implied. This photograph is separate from the training datasets.

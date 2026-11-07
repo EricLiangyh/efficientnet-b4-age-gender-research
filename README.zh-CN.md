@@ -74,33 +74,22 @@ git clone https://github.com/EricLiangyh/efficientnet-b4-age-gender-research.git
 cd efficientnet-b4-age-gender-research
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe weights/predict.py --image weights/example_face.png --device cpu
+.\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
 ```
 
 Linux/macOS 将 `.\.venv\Scripts\python.exe` 换为 `.venv/bin/python`。使用 GPU 时先准备匹配的 PyTorch/CUDA 环境。预测直接加载仓库权重，不另外下载 ImageNet 初始化参数。
 
-### 可运行的输入输出示例
+### 已授权的照片示例
 
-<img src="weights/example_face.png" alt="几何图形绘制的虚构人脸，仅用于接口演示" width="150" />
+<img src="weights/example_face.png" alt="用户授权展示的示例照片，保留未裁剪原图" width="180" />
 
-这是为本项目绘制的**虚构人脸几何示意图**，不是真实人物照片，没有真实年龄或性别标签，也不属于模型预期的照片输入分布。它只展示模型加载、图片处理和输出接口可运行，不能证明真实人脸预测效果。
+照片由项目所有者提供，并已确认可用于本仓库展示；文件保持原样，未修改人物或图像内容。原图包含上半身和背景，推理前需裁出一张完整人脸，保留少量额头、下巴边缘，将工作副本保存为本地 `face_crop.jpg`。不必手动缩放到 380×380。
 
-该输入实测 CPU 输出的主要字段如下，不同环境可能有微小数值差异：
+本照片未附实测预测结果或真实标签。此图用于说明输入准备，不作为准确率证据。展示授权不代表访客获得通用转载许可。
 
-```json
-{
-  "estimated_age_years": 23.47665023803711,
-  "gender_label": 0,
-  "label_probabilities": [
-    0.5455504655838013,
-    0.45444953441619873
-  ]
-}
-```
+准备好裁剪图后运行：
 
-[完整输出、输入/权重哈希及运行环境](weights/example_output.json)。类别概率顺序为 `[male, female]`，未经校准。
 
-要试用有权使用的真实人脸裁剪图：
 
 ```powershell
 .\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu

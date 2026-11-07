@@ -26,6 +26,6 @@ The only standalone supporting utility is `weights/predict.py`, which loads the 
 
 No original dataset or split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.
 
-## Included interface example
+## Authorized example photograph
 
-`weights/example_face.png` is a geometric illustration of a fictional face created for this repository, not a photograph or dataset sample. `weights/example_output.json` records its actual CPU inference output, file hashes and environment. There is no ground-truth age or gender; this is an executable interface example and does not establish photographic-domain performance. The generation helper is not part of the research code.
+`weights/example_face.png` was supplied by the project owner, who confirmed permission to use it in this repository. It is copied unchanged from the supplied image, not a dataset sample. The image is an uncropped input reference; inference requires a prepared face crop. No measured prediction output or ground-truth labels are attached. This display permission is not a general image reuse license.

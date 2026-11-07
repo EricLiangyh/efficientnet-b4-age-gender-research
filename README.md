@@ -74,33 +74,22 @@ git clone https://github.com/EricLiangyh/efficientnet-b4-age-gender-research.git
 cd efficientnet-b4-age-gender-research
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe weights/predict.py --image weights/example_face.png --device cpu
+.\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
 ```
 
 On Linux/macOS replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. For CUDA, choose a matching PyTorch build before running inference. Model initialization uses the included checkpoint and does not download ImageNet weights.
 
-### Included executable example
+### Authorized photograph example
 
-<img src="weights/example_face.png" alt="Geometric illustration of a fictional face, for interface demonstration only" width="150" />
+<img src="weights/example_face.png" alt="User-authorized example photograph, original uncropped image" width="180" />
 
-The input is a **geometric schematic of a fictional face**, created for this repository. It is not a photograph, has no ground-truth age/gender and is outside the intended photographic input domain. It demonstrates that loading, preprocessing and JSON output work; it is not a model-quality showcase.
+This photograph was supplied by the project owner with permission to display it in this repository. The original image is preserved unchanged. It includes the upper body and background: crop a single complete face with a small forehead/chin margin before inference, and save your working crop locally as `face_crop.jpg`. Resizing to 380×380 is automatic.
 
-Selected output fields recorded on CPU for this input (small numerical differences may occur across environments):
+No measured predictions or ground-truth labels are attached to this photograph. The photograph is an input reference, not an accuracy benchmark. Display permission does not grant a general reuse license to visitors.
 
-```json
-{
-  "estimated_age_years": 23.47665023803711,
-  "gender_label": 0,
-  "label_probabilities": [
-    0.5455504655838013,
-    0.45444953441619873
-  ]
-}
-```
+Run the prediction command on your prepared face crop:
 
-[Recorded output, hashes and environment](weights/example_output.json). `label_probabilities` are ordered `[male, female]` and are uncalibrated.
 
-For an authorized real face crop:
 
 ```powershell
 .\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
