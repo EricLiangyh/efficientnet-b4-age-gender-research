@@ -15,3 +15,7 @@ No repository-wide license has been chosen. Private hosting does not change thir
 Consult each original source before downloading or using data/models. InsightFace's source code and pretrained-model terms are distinct; pretrained models are described upstream as for non-commercial research. Dataset pages also specify their own usage conditions. This repository distributes neither datasets nor InsightFace pretrained assets.
 
 The selected age/gender checkpoint is a research artifact trained using third-party data and ImageNet initialization. Its presence in this private repository does not grant any additional license. File integrity and source mapping are in `weights/manifest.json` and `docs/provenance.md`.
+
+## Included demonstration asset
+
+`weights/example_face.png` was drawn from simple geometric shapes for this repository. It is fictional and is not derived from a photograph or a dataset. Its inference output is an interface demonstration, not labelled evaluation evidence. No additional third-party photograph is included.

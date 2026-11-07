@@ -1,0 +1,20 @@
+{
+  "estimated_age_years": 23.47665023803711,
+  "gender_label": 0,
+  "label_probabilities": [
+    0.5455504655838013,
+    0.45444953441619873
+  ],
+  "note": "Dataset labels 0=male, 1=female; probabilities are uncalibrated.",
+  "example_context": {
+    "input": "weights/example_face.png",
+    "input_sha256": "d62d0de178c74a23ba0b55045435b10f25b59fbedbed5ca839d4d290e0e1b84b",
+    "checkpoint_sha256": "1d26f1728f4be79b709459432c604423c4479bc975c69cf1e6a0f5a009a1a63c",
+    "input_type": "geometric schematic of a fictional face; not a photograph",
+    "purpose": "Executable interface demonstration only; no ground-truth age or gender and no accuracy claim",
+    "device": "cpu",
+    "python": "3.14.5",
+    "torch": "2.14.1+cpu",
+    "date": "2026-11-07"
+  }
+}

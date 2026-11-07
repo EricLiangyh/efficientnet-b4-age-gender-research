@@ -6,6 +6,7 @@
 | --- | --- |
 | [efficientnet_b4_c3_epoch35.pth](efficientnet_b4_c3_epoch35.pth) | 选定的 C3 第 35 轮 B4 参数，约 71 MB |
 | [predict.py](predict.py) | 加载同目录权重，预测一张已裁剪人脸图片 |
+| [example_face.png](example_face.png)、[example_output.json](example_output.json) | 虚构人脸几何示意图及实测输出，仅验证接口流程 |
 | [manifest.json](manifest.json) | 文件大小、SHA256，以及另一历史权重的区别 |
 
 权重按目录来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [日志](../experiments/logs/b4_35.csv)。原始全数据 `training/train_pro.py` 是另一版本，不能直接认定为本权重的生成代码。
@@ -16,10 +17,12 @@
 
 ```powershell
 python -m pip install -r requirements.txt
-python weights/predict.py --image path/to/face_crop.jpg --device cpu
+python weights/predict.py --image weights/example_face.png --device cpu
 ```
 
-将 `path/to/face_crop.jpg` 替换为实际图片路径；路径包含空格时加双引号。默认使用 CPU，在配置好 CUDA 的环境中可指定 `--device cuda`。默认权重按脚本所在目录查找；使用其他同结构权重时，可通过 `--checkpoint` 指定文件。
+示例图为几何图形绘制的虚构人脸，无真实年龄或性别标签，不代表照片域效果。`example_output.json` 保存实测输出及输入/权重哈希；仅 `example_context` 为说明元数据，不是预测程序额外输出的字段。
+
+试用真实图片时，将 `weights/example_face.png` 替换为自己有权使用的人脸裁剪图片路径；路径包含空格时加双引号。默认使用 CPU，在配置好 CUDA 的环境中可指定 `--device cuda`。默认权重按脚本所在目录查找；使用其他同结构权重时，可通过 `--checkpoint` 指定文件。
 
 ## “已裁剪的人脸图片”是什么意思
 

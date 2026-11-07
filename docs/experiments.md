@@ -6,6 +6,8 @@ Figures are organized by research question. This is a presentation order, not a 
 
 Compare model families under a 15-epoch budget.
 
+**Observation:** B4 has the lowest recorded age MAE and the highest recorded gender accuracy among these three runs. This is an observed ranking, not proof of general superiority.
+
 | Configuration | Epochs | Age MAE (years) | Gender accuracy (%) | Source |
 | --- | ---: | ---: | ---: | --- |
 | EfficientNet-B4 | 15 | 3.5445 | 98.1699 | [CSV](../experiments/logs/b4_15.csv) |
@@ -18,6 +20,8 @@ Compare model families under a 15-epoch budget.
 
 Compare B4 and B0 under a 15-epoch budget.
 
+**Observation:** B4 records lower MAE (3.5445 vs 3.6903) and slightly higher accuracy (98.1699% vs 97.9618%). These logs alone do not establish a compute/accuracy optimum.
+
 | Configuration | Epochs | Age MAE (years) | Gender accuracy (%) | Source |
 | --- | ---: | ---: | ---: | --- |
 | EfficientNet-B4 | 15 | 3.5445 | 98.1699 | [CSV](../experiments/logs/b4_15.csv) |
@@ -27,7 +31,9 @@ Compare B4 and B0 under a 15-epoch budget.
 
 ## 3a. Data augmentation
 
-Hold the B4 baseline fixed and compare augmentation settings.
+Compare the archived B4 baseline and no-augmentation settings.
+
+**Observation:** Full augmentation records MAE 3.5445 versus 3.6520 without augmentation; accuracy is 98.1699% versus 97.9239%. The single-run evidence motivates repeated controlled experiments.
 
 | Configuration | Epochs | Age MAE (years) | Gender accuracy (%) | Source |
 | --- | ---: | ---: | ---: | --- |
@@ -40,6 +46,8 @@ Hold the B4 baseline fixed and compare augmentation settings.
 
 Compare gender-loss coefficients for the 15-epoch B4 runs.
 
+**Observation:** Weight 6 records higher classification accuracy than weight 1 (98.1699% vs 97.8283%); age MAE changes little (3.5445 vs 3.5490). The two tasks should be assessed together.
+
 | Configuration | Epochs | Age MAE (years) | Gender accuracy (%) | Source |
 | --- | ---: | ---: | ---: | --- |
 | Gender loss weight = 6 | 15 | 3.5445 | 98.1699 | [CSV](../experiments/logs/b4_15.csv) |
@@ -50,6 +58,8 @@ Compare gender-loss coefficients for the 15-epoch B4 runs.
 ## 3c. Face alignment
 
 Compare the archived aligned and unaligned B4 experiments.
+
+**Observation:** Alignment records lower MAE (3.5445 vs 3.6101) and higher classification accuracy (98.1699% vs 97.4825%). Missing original split manifests limit causal interpretation.
 
 | Configuration | Epochs | Age MAE (years) | Gender accuracy (%) | Source |
 | --- | ---: | ---: | ---: | --- |

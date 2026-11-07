@@ -1,57 +1,125 @@
 # EfficientNet-B4 Age and Gender Estimation Research
 
-Multi-task facial age regression and gender-label classification with a shared EfficientNet-B4 backbone.
+**A personal research project on joint facial age regression and gender-label classification.** It investigates how backbone choice, face alignment, augmentation and task-loss weighting affect a shared EfficientNet-B4 model.
 
-[中文](README.zh-CN.md)
+[中文说明](README.zh-CN.md) · [Research results](docs/experiments.md) · [Model card](docs/model-card.md)
 
-## Start with the research implementation
+## Research motivation
 
-| Step | File | Purpose |
+Image-based audience analysis needs both age estimates and attribute classification, while face pose, image quality and data-source differences complicate prediction. This project studies a shared visual representation for the two tasks and examines the effects of specific preprocessing and training choices. Its focus is experimental analysis of established architectures.
+
+## My work in this project
+
+- Built a multi-source preprocessing workflow for UTKFace, AFAD and a locally prepared IMDB subset, including label conversion, landmark-based rotation and expanded face cropping.
+- Adapted an ImageNet-pretrained EfficientNet-B4 into a shared backbone with separate age regression and two-logit classification heads.
+- Conducted backbone comparisons and augmentation, loss-weight and alignment ablations; retained eight historical training logs and their experiment scripts.
+- Analyzed convergence and task trade-offs, and provided a selected checkpoint with a minimal cropped-face inference entry point.
+
+The research contribution is the task adaptation, training workflow and experimental analysis. EfficientNet and the pretrained components are credited to their original authors; no new backbone or state-of-the-art result is claimed.
+
+## Explore the implementation
+
+| Step | Entry | What to inspect |
 | --- | --- | --- |
-| **1. Prepare data** | [preprocessing/](preprocessing/README.md) | Complete original preprocessing: dataset scanning, face alignment and cropping |
-| **2. Train the model** | [training/](training/README.md) | Complete original EfficientNet-B4 dual-head training implementation |
-| **3. Use trained weights** | [weights/](weights/README.md) | Selected C3 epoch-35 checkpoint, source and usage |
+| **1. Data preprocessing** | [preprocessing/](preprocessing/README.md) | Original complete script, dataset layout, labels, alignment and crop settings |
+| **2. Model training** | [training/](training/README.md) | Original complete training implementation, architecture, augmentation and loss |
+| **3. Trained model** | [weights/](weights/README.md) | C3 checkpoint, prediction command and input requirements |
 
-The two original source files are unchanged. The selected checkpoint comes from the separate [C3 split-based training script](experiments/legacy/b4_35.py), not the original full-data training run. [Source and integrity records](docs/provenance.md) explain the distinction.
+### Which training version produced the selected artifact?
+
+| Artifact | Training protocol | Relationship to the distributed weights |
+| --- | --- | --- |
+| [Original train_pro.py](training/train_pro.py) | All merged data; no held-out validation loop | Preserved original implementation; a different historical training version |
+| [Archived C3 b4_35.py](experiments/legacy/b4_35.py) | 80/20 image-level training/validation split, 35 epochs | Associated by source folder with the [selected checkpoint](weights/efficientnet_b4_c3_epoch35.pth) and [C3 log](experiments/logs/b4_35.csv) |
+
+Original scripts are unchanged. File integrity is recorded, but the original sample-membership manifest is unavailable; folder association and matching architecture do not independently prove training provenance. [Details](docs/provenance.md).
 
 ## Method
 
-The model shares 1792-dimensional EfficientNet-B4 features between a linear age head and a two-logit classification head. Historical training uses `L1(age) + 6 × CrossEntropy(gender)`, label smoothing 0.1, AdamW, OneCycleLR and composite augmentation.
+```text
+Aligned RGB face, 380×380 → ImageNet normalization → EfficientNet-B4
+                                                   ↓ shared 1792-D features
+                                                   ├── age regression: 1 value
+                                                   └── gender labels: 2 logits
+```
 
-[Data preparation, training parameters and evaluation notes](docs/methodology.md)
+The joint objective is `L1(age) + 6 × CrossEntropy(gender)` with label smoothing 0.1. Historical training uses AdamW, OneCycleLR, mixed precision and composite augmentation. The implementation uses PyTorch/Torchvision, InsightFace, OpenCV and Pillow; their roles and configuration are explained in the [method guide](docs/methodology.md).
 
-## Experiments
+## Key experimental observations
 
-1. **Backbone selection, 15 epochs:** B4 vs ResNet-50 vs VGG-16.
-2. **EfficientNet scaling, 15 epochs:** B4 vs B0.
-3. **Training strategies, 15 epochs each:** augmentation, task-loss weighting and alignment.
-4. **Final B4 training, 35 epochs:** loss and validation metrics shown separately.
+Comparisons below use the final validation rows of the **15-epoch historical runs**. Lower MAE is better; accuracy is in percent.
 
-[Experiment code and logs](experiments/README.md) · [Grouped results and figures](docs/experiments.md)
+| Research question | Observation in the archived records |
+| --- | --- |
+| Backbone family | B4: **3.5445** years MAE; ResNet-50: 3.8423; VGG-16: 4.1115 |
+| EfficientNet scale | B4: **3.5445** years MAE versus B0: 3.6903 |
+| Data augmentation | MAE: 3.6520 without augmentation → **3.5445** with full augmentation |
+| Task-loss weighting | Gender accuracy: 97.8283% at weight 1 → **98.1699%** at weight 6; age MAE changes only slightly, 3.5490 → 3.5445 |
+| Face alignment | Gender accuracy: 97.4825% without alignment → **98.1699%** with alignment; MAE: 3.6101 → 3.5445 |
 
-The final historical validation log records **MAE 3.4074 years** and **accuracy 98.2064%**. These are archived validation observations, not freshly verified independent-test results. The original sample-level partition manifest is unavailable.
+The separate **35-epoch C3 record** ends at **3.4074 years validation MAE** and **98.2064% validation accuracy**. Its longer budget is shown separately from the 15-epoch comparisons.
 
-![Final B4 training](experiments/figures/final_training_35.png)
+These are single-run historical validation observations, not newly verified independent-test benchmarks. They suggest directions for further experiments, but do not establish statistically significant or fully controlled causal effects.
 
-## Try the checkpoint
+[Grouped figures and source CSVs](docs/experiments.md) · [Experiment script index](experiments/README.md)
 
-With compatible PyTorch/Torchvision installed, install the small inference dependency set and supply an already-cropped face:
+![Final C3 training](experiments/figures/final_training_35.png)
+
+## Quick start: run the selected checkpoint
+
+Python, Git and a compatible PyTorch/Torchvision environment are required. While the repository is private, cloning requires an account with access.
 
 ```powershell
-python -m pip install -r requirements.txt
-python weights/predict.py --image path/to/face_crop.jpg
+git clone https://github.com/EricLiangyh/efficientnet-b4-age-gender-research.git
+cd efficientnet-b4-age-gender-research
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe weights/predict.py --image weights/example_face.png --device cpu
 ```
 
-`weights/predict.py` is a single-file inference helper; it does not detect faces or measure accuracy. Dataset labels are 0=male and 1=female. Probabilities are uncalibrated and are not claims about personal gender identity.
+On Linux/macOS replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. For CUDA, choose a matching PyTorch build before running inference. Model initialization uses the included checkpoint and does not download ImageNet weights.
 
-## Repository structure
+### Included executable example
+
+<img src="weights/example_face.png" alt="Geometric illustration of a fictional face, for interface demonstration only" width="150" />
+
+The input is a **geometric schematic of a fictional face**, created for this repository. It is not a photograph, has no ground-truth age/gender and is outside the intended photographic input domain. It demonstrates that loading, preprocessing and JSON output work; it is not a model-quality showcase.
+
+Selected output fields recorded on CPU for this input (small numerical differences may occur across environments):
+
+```json
+{
+  "estimated_age_years": 23.47665023803711,
+  "gender_label": 0,
+  "label_probabilities": [
+    0.5455504655838013,
+    0.45444953441619873
+  ]
+}
+```
+
+[Recorded output, hashes and environment](weights/example_output.json). `label_probabilities` are ordered `[male, female]` and are uncalibrated.
+
+For an authorized real face crop:
+
+```powershell
+.\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
+```
+
+Use one complete face with a small margin around the forehead and chin, not an uncropped group photo. Resizing is automatic; face detection is not included. [Input and output guide](weights/README.md).
+
+## Scope and next research steps
+
+The repository contains original research code, historical evidence and inference, not a turnkey training/evaluation framework. Training/preprocessing dependencies and original Linux/CUDA paths require separate setup. Full-dataset reevaluation, original split reconstruction and identity-disjoint testing have not been completed.
+
+Next steps are identity-aware deduplication and frozen split manifests, an untouched external test set, repeated seeds and subgroup/error analysis. Binary dataset labels do not determine personal gender identity. [Model limitations](docs/model-card.md).
 
 ```text
-preprocessing/          Original preprocessing code and setup guide
-training/               Original training code and setup guide
-weights/                 Trained model, prediction script and usage guide
-experiments/             Historical scripts, eight logs and six figures
-docs/                    Method, model card, results and provenance
+preprocessing/   Original preprocessing and configuration guide
+training/        Original training and parameter guide
+weights/         Selected checkpoint, prediction code and example
+experiments/     Historical scripts, eight logs and six figures
+docs/            Method, results, model card and provenance
 ```
 
-No dataset images, private media, web application or generic training framework is included. No project-wide license is selected; [third-party terms](THIRD_PARTY_NOTICES.md) apply separately. See the [model card](docs/model-card.md) for limitations.
+Author: **EricLiangyh (Yiheng Liang)**. No project-wide license is selected. Code, data and pretrained-model usage terms must be considered separately; see [third-party notices](THIRD_PARTY_NOTICES.md). No training dataset or private photograph is distributed.
