@@ -1,6 +1,6 @@
 # 数据集预处理 / Dataset preprocessing
 
-[返回项目首页](../README.md) · [查看完整代码：preprocess_pro.py](preprocess_pro.py) · [下一步：模型训练](../train_pro.py)
+[返回项目首页](../README.md) · [查看完整代码：preprocess_pro.py](preprocess_pro.py) · [下一步：模型训练](../training/README.md)
 
 本目录只包含原始预处理脚本和这份说明。脚本逐字节保留，未修改算法、参数或注释；文件校验记录见 [original_scripts.json](../docs/original_scripts.json)。
 

@@ -7,10 +7,10 @@
 | 顺序 | 文件 | 内容 |
 | --- | --- | --- |
 | **1. 数据预处理** | [preprocessing/](preprocessing/README.md) | 原始数据扫描、标签转换、关键点旋转对齐与裁剪 |
-| **2. 模型训练** | [train_pro.py](train_pro.py) | 原始 B4 双任务结构、数据增强、联合损失和训练循环 |
+| **2. 模型训练** | [training/](training/README.md) | 原始 B4 双任务结构、数据增强、联合损失和训练循环 |
 | **3. 训练好的模型** | [weights/](weights/README.md) | C3 第 35 轮权重、来源和使用方式 |
 
-两个原始脚本完整保留，未经改动。现有权重来自另一组 [C3 划分训练实验](experiments/legacy/b4_35.py)，与根目录的全数据训练脚本分别记录；详见 [来源说明](docs/provenance.md)。
+两个原始脚本完整保留，未经改动。现有权重来自另一组 [C3 划分训练实验](experiments/legacy/b4_35.py)，与原始全数据训练脚本分别记录；详见 [来源说明](docs/provenance.md)。
 
 ## 研究方法
 
@@ -46,7 +46,7 @@ python predict.py --image path/to/face_crop.jpg
 
 ```text
 preprocessing/          原始预处理代码与配置说明
-train_pro.py             原始模型训练
+training/               原始训练代码与配置说明
 predict.py               单文件推理入口
 weights/                 已训练模型和校验信息
 experiments/             历史实验脚本、八组日志、六张图

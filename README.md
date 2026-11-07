@@ -9,10 +9,10 @@ Multi-task facial age regression and gender-label classification with a shared E
 | Step | File | Purpose |
 | --- | --- | --- |
 | **1. Prepare data** | [preprocessing/](preprocessing/README.md) | Complete original preprocessing: dataset scanning, face alignment and cropping |
-| **2. Train the model** | [train_pro.py](train_pro.py) | Complete original EfficientNet-B4 dual-head training implementation |
+| **2. Train the model** | [training/](training/README.md) | Complete original EfficientNet-B4 dual-head training implementation |
 | **3. Use trained weights** | [weights/](weights/README.md) | Selected C3 epoch-35 checkpoint, source and usage |
 
-The two original source files are unchanged. The selected checkpoint comes from the separate [C3 split-based training script](experiments/legacy/b4_35.py), not the root full-data training run. [Source and integrity records](docs/provenance.md) explain the distinction.
+The two original source files are unchanged. The selected checkpoint comes from the separate [C3 split-based training script](experiments/legacy/b4_35.py), not the original full-data training run. [Source and integrity records](docs/provenance.md) explain the distinction.
 
 ## Method
 
@@ -48,7 +48,7 @@ python predict.py --image path/to/face_crop.jpg
 
 ```text
 preprocessing/          Original preprocessing code and setup guide
-train_pro.py             Original training
+training/               Original training code and setup guide
 predict.py               Minimal checkpoint inference
 weights/                 Selected trained model and checksums
 experiments/             Historical scripts, eight logs and six figures

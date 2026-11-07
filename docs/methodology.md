@@ -27,14 +27,16 @@ IMDB CSV 使用 `filename`、`age`、`gender`。预处理包含 InsightFace 检�
 
 ```bash
 python preprocessing/preprocess_pro.py
-python train_pro.py
+python training/train_pro.py
 ```
 
 根目录 `requirements.txt` 只包含单张推理所需依赖。预处理还需要 OpenCV、NumPy、Pandas、InsightFace 和匹配硬件的 ONNX Runtime，训练还需要 tqdm。历史对比脚本可能另需 Pandas/Matplotlib。InsightFace 资产和 ImageNet 初始化权重按上游条款准备，不随仓库分发。
 
 ## 参数在哪里修改
 
-原始训练参数在 [train_pro.py](../train_pro.py) 内，历史实验各自参数在 [对应脚本](../experiments/README.md) 内。本仓库没有第二套 JSON 配置驱动的训练框架。
+模型结构、增强、优化、运行和输出说明见 [训练指南](../training/README.md)。
+
+原始训练参数在 [train_pro.py](../training/train_pro.py) 内，历史实验各自参数在 [对应脚本](../experiments/README.md) 内。本仓库没有第二套 JSON 配置驱动的训练框架。
 
 | 设置 | 原始值 | 含义 |
 | --- | --- | --- |

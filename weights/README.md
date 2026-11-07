@@ -7,7 +7,7 @@
 | [efficientnet_b4_c3_epoch35.pth](efficientnet_b4_c3_epoch35.pth) | 选定的 C3 第 35 轮 B4 参数，约 71 MB |
 | [manifest.json](manifest.json) | 文件大小、SHA256，以及另一历史权重的区别 |
 
-权重按目录来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [日志](../experiments/logs/b4_35.csv)。根目录全数据 `train_pro.py` 是另一版本，不能直接认定为本权重的生成代码。
+权重按目录来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [日志](../experiments/logs/b4_35.csv)。原始全数据 `training/train_pro.py` 是另一版本，不能直接认定为本权重的生成代码。
 
 在仓库根目录执行：
 

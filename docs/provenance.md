@@ -16,7 +16,7 @@ The 20% partition was used during training to monitor validation metrics. It sho
 
 ## Verbatim original source files
 
-`preprocessing/preprocess_pro.py` and root-level `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these original files. They are separate from the renamed historical archive.
+`preprocessing/preprocess_pro.py` and `training/train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these original files. They are separate from the renamed historical archive.
 
 ## Archived scripts and minimal utilities
 
