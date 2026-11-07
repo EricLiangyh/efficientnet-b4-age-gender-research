@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "efficientnet-b4-age-gender-research"
+version = "0.1.0"
+description = "Multi-task facial age regression and gender-label classification with EfficientNet-B4"
+requires-python = ">=3.10"
+authors = [{name = "EricLiangyh"}]
+dependencies = ["torch>=2.3", "torchvision>=0.18", "Pillow>=10", "numpy>=1.26", "tqdm>=4.66", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+preprocess = ["opencv-python>=4.10", "pandas>=2.2", "insightface>=0.7.3", "onnxruntime>=1.18"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["age_gender*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

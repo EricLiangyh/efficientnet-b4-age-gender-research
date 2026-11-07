@@ -1,0 +1,13 @@
+{
+  "primary": {
+    "efficientnet_b4_c3_epoch35.pth": {
+      "bytes": 70991633,
+      "sha256": "1d26f1728f4be79b709459432c604423c4479bc975c69cf1e6a0f5a009a1a63c"
+    }
+  },
+  "historical_full_data": {
+    "sha256": "b62f7dc786e171d71782ebc33916aa9cfa1b3ca5423d89cb6637130a0161eb4b",
+    "included": false,
+    "reason": "Different checkpoint; training source has no holdout split."
+  }
+}

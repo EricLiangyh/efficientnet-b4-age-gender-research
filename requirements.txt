@@ -1,0 +1,2 @@
+# Install the core research package from the repository root.
+-e .

@@ -1,0 +1,28 @@
+# Local environments and outputs
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.env
+.env.*
+!.env.example
+data/
+runs/
+tmp/
+build/
+dist/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+# Only the selected research checkpoint is versioned.
+*.pth
+!weights/efficientnet_b4_c3_epoch35.pth
+*.pt
+*.zip
+*.mp4
+*.avi
+*.sqlite*
+*.sql
