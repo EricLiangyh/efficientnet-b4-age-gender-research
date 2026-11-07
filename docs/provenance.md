@@ -16,11 +16,11 @@ The 20% partition was used during training to monitor validation metrics. It sho
 
 ## Verbatim original source files
 
-Root-level `preprocess_pro.py` and `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these root-level originals. They are separate from the renamed historical archive.
+`preprocessing/preprocess_pro.py` and root-level `train_pro.py` preserve the two supplied files byte-for-byte, including comments, configuration and line endings. `.gitattributes` disables text conversion specifically for these files. SHA256 and sizes are in `original_scripts.json`. No wording substitutions were made to these original files. They are separate from the renamed historical archive.
 
 ## Archived scripts and minimal utilities
 
-Historical comparison scripts preserve original experimental behavior, including Linux paths, recursive bad-image replacement and unsorted enumeration. Their filenames and some comments were adjusted during archiving. The root original scripts remain byte-for-byte unchanged.
+Historical comparison scripts preserve original experimental behavior, including Linux paths, recursive bad-image replacement and unsorted enumeration. Their filenames and some comments were adjusted during archiving. The original preprocessing and training scripts remain byte-for-byte unchanged.
 
 The only standalone supporting utility is `predict.py`, which loads the selected B4 checkpoint for cropped-face inference. Existing figures are retained alongside their source CSV logs; no standalone plotting script is included. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
 

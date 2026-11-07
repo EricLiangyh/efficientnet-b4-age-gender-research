@@ -6,7 +6,7 @@
 
 | 顺序 | 文件 | 内容 |
 | --- | --- | --- |
-| **1. 数据预处理** | [preprocess_pro.py](preprocess_pro.py) | 原始数据扫描、标签转换、关键点旋转对齐与裁剪 |
+| **1. 数据预处理** | [preprocessing/](preprocessing/README.md) | 原始数据扫描、标签转换、关键点旋转对齐与裁剪 |
 | **2. 模型训练** | [train_pro.py](train_pro.py) | 原始 B4 双任务结构、数据增强、联合损失和训练循环 |
 | **3. 训练好的模型** | [weights/](weights/README.md) | C3 第 35 轮权重、来源和使用方式 |
 
@@ -45,7 +45,7 @@ python predict.py --image path/to/face_crop.jpg
 ## 精简目录
 
 ```text
-preprocess_pro.py        原始数据预处理
+preprocessing/          原始预处理代码与配置说明
 train_pro.py             原始模型训练
 predict.py               单文件推理入口
 weights/                 已训练模型和校验信息

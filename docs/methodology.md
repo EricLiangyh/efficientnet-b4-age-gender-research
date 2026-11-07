@@ -4,7 +4,9 @@
 
 ## 数据预处理：preprocess_pro.py
 
-[原始代码](../preprocess_pro.py)读取 UTKFace、AFAD，以及本地 IMDB 清洗子集。原始布局为：
+完整的目录配置、标签转换、处理细节和运行步骤见 [预处理说明](../preprocessing/README.md)。
+
+[原始代码](../preprocessing/preprocess_pro.py)读取 UTKFace、AFAD，以及本地 IMDB 清洗子集。原始布局为：
 
 ```text
 /root/my_age_project/data/
@@ -24,7 +26,7 @@ IMDB CSV 使用 `filename`、`age`、`gender`。预处理包含 InsightFace 检�
 脚本保留原 Linux/CUDA 路径和配置。先在工作副本中调整数据位置、输出目录、CUDA/ONNX provider 和 worker 数量，再运行：
 
 ```bash
-python preprocess_pro.py
+python preprocessing/preprocess_pro.py
 python train_pro.py
 ```
 
