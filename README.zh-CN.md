@@ -2,6 +2,28 @@
 
 [English](README.md) · [模型说明](docs/model-card.md) · [实验记录](docs/experiments.md) · [复现协议](docs/reproducibility.md)
 
+## 第一次看项目，从这三个入口开始
+
+| 顺序 | 入口 | 你会看到什么 |
+| --- | --- | --- |
+| **1. 数据集怎样预处理** | [preprocess_pro.py](preprocess_pro.py) | 原始数据扫描、标签转换、关键点对齐和图片导出 |
+| **2. 模型怎样训练** | [train_pro.py](train_pro.py) | 原始 B4 双任务结构、增强、损失函数和训练循环 |
+| **3. 训练出来的模型** | [权重与使用说明](weights/README.md) | 权重文件、加载方法、对应实验和校验信息 |
+
+[完整阅读路线与代码关系图](docs/reading-guide.md)
+
+根目录训练代码是全数据训练版本；仓库采用的权重来自另一组 **C3 划分训练实验**。想核对该权重的关联代码，请看 [C3 35 轮训练脚本](experiments/legacy/b4_35.py) 和 [对应日志](experiments/logs/b4_35.csv)，二者不能混为同一次运行。
+
+### 再按兴趣深入
+
+| 想继续了解 | 入口 |
+| --- | --- |
+| 为什么选 B4、增强和任务权重有什么作用 | [实验导航](experiments/README.md) → [分组结果图](docs/experiments.md) |
+| `age_gender` 各文件是什么、如何相互调用 | [代码逐文件说明](age_gender/README.md) |
+| 参数如何修改、如何开展新对比实验 | [配置说明](configs/README.md) → [详细调参指南](docs/tuning.md) |
+| `evaluate.py` 是什么、如何计算效果 | [评估指南](docs/evaluation.md) |
+| 全部说明在哪里 | [文档导航](docs/README.md) |
+
 本项目研究共享 EfficientNet-B4 骨干下的年龄回归与性别标签分类，围绕多源数据融合、人脸几何预处理、复合数据增强与多任务损失加权开展实验。仓库集中呈现模型、训练方法与实验依据。
 
 ## 原始预处理与训练代码
@@ -70,6 +92,6 @@ python -m age_gender.evaluate --checkpoint runs/b4/best.pth --data-root data/ali
 
 ## 文件组织
 
-`age_gender/` 是统一研究代码，`configs/` 保存新实验配置，`experiments/legacy/` 保存历史脚本，`experiments/logs/` 保存八组日志，`weights/` 保存选定模型与校验信息，`docs/` 说明实验来源、局限与检查结果，`tests/` 检查数据隔离和指标计算。
+根目录两个 `.py` 是原始代码，`weights/` 的 README 说明模型使用方式；`age_gender/` 是后续统一研究代码，`configs/` 保存新实验配置，`experiments/legacy/` 保存历史脚本，`experiments/logs/` 保存八组日志，`weights/` 保存选定模型与校验信息，`docs/` 说明实验来源、局限与检查结果，`tests/` 检查数据隔离和指标计算。
 
 当前未对项目选择开源许可证。第三方依赖与数据遵循各自条款，详见 [来源说明](THIRD_PARTY_NOTICES.md)。仓库不包含原始数据集、私人图像或账号数据库。预测任务对应数据集中的二元标签，不代表对个人性别身份的判断。

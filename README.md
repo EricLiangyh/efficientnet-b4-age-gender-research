@@ -4,6 +4,21 @@
 
 [中文说明](README.zh-CN.md) · [Model card](docs/model-card.md) · [Experiments](docs/experiments.md) · [Reproducibility](docs/reproducibility.md)
 
+## Start here / 建议阅读顺序
+
+| First visit | Entry | What it explains |
+| --- | --- | --- |
+| **1 · 数据预处理 / Preprocessing** | [preprocess_pro.py](preprocess_pro.py) | Complete original data preparation code |
+| **2 · 模型训练 / Training** | [train_pro.py](train_pro.py) | Complete original model and training code |
+| **3 · 训练好的模型 / Trained model** | [Weight guide and checkpoint](weights/README.md) | Selected C3 weights, usage and experiment source |
+| Then · Model selection and tuning | [Grouped experiments](experiments/README.md) | Backbone comparisons, ablations and final training |
+| Then · Understand or extend the tools | [Code guide](age_gender/README.md) · [Parameters](configs/README.md) | What each file does and how modules connect |
+| Then · Measure performance | [Evaluation guide](docs/evaluation.md) · [Tuning guide](docs/tuning.md) | Evaluation inputs/outputs and parameter experiments |
+
+[中文阅读路线与代码关系图](docs/reading-guide.md) · [全部文档](docs/README.md)
+
+The root training script uses all merged data. The distributed checkpoint is from the separate C3 split-based experiment; inspect [its training script](experiments/legacy/b4_35.py) and [log](experiments/logs/b4_35.csv) to understand that artifact. Original and revised code are kept distinct.
+
 This research repository studies a shared EfficientNet-B4 backbone with separate age and gender prediction heads, multi-source face data, geometric preprocessing, and composite data augmentation. It includes historical experiment evidence alongside a new manifest-based training and evaluation pipeline.
 
 The work focuses on **model training, backbone comparisons and ablation experiments**. A web application is outside this repository's scope.
@@ -95,12 +110,14 @@ Optional preprocessing accepts a labelled input CSV; see [data preparation](docs
 ## Repository map
 
 ```text
-age_gender/              Unified model, split, training, evaluation and inference
+preprocess_pro.py        Complete original preprocessing source
+train_pro.py             Complete original training source
+weights/                 Start here for checkpoint usage and provenance
+age_gender/              Revised tools; see its README before exploring files
 configs/                 Explicit research configurations
 experiments/legacy/      Archived scripts, separate from the new pipeline
 experiments/logs/        Eight historical CSV training records
 experiments/figures/     Figures regenerated from those records
-weights/                 C3 epoch-35 checkpoint and SHA256 provenance
 docs/                    Protocol, results, model card, limitations and validation
 tests/                   Split isolation, metrics and checkpoint checks
 ```
