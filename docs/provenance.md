@@ -22,6 +22,6 @@ The 20% partition was used during training to monitor validation metrics. It sho
 
 Historical comparison scripts preserve original experimental behavior, including Linux paths, recursive bad-image replacement and unsorted enumeration. Their filenames and some comments were adjusted during archiving. The original preprocessing and training scripts remain byte-for-byte unchanged.
 
-The only standalone supporting utility is `predict.py`, which loads the selected B4 checkpoint for cropped-face inference. Existing figures are retained alongside their source CSV logs; no standalone plotting script is included. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
+The only standalone supporting utility is `weights/predict.py`, which loads the selected B4 checkpoint for cropped-face inference. Existing figures are retained alongside their source CSV logs; no standalone plotting script is included. The previously added general training package, JSON configurations and redundant summaries were removed to keep the source focused on the original research.
 
 No original dataset or split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.

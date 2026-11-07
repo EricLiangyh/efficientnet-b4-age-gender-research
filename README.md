@@ -39,18 +39,17 @@ With compatible PyTorch/Torchvision installed, install the small inference depen
 
 ```powershell
 python -m pip install -r requirements.txt
-python predict.py --image path/to/face_crop.jpg
+python weights/predict.py --image path/to/face_crop.jpg
 ```
 
-`predict.py` is a single-file inference helper; it does not detect faces or measure accuracy. Dataset labels are 0=male and 1=female. Probabilities are uncalibrated and are not claims about personal gender identity.
+`weights/predict.py` is a single-file inference helper; it does not detect faces or measure accuracy. Dataset labels are 0=male and 1=female. Probabilities are uncalibrated and are not claims about personal gender identity.
 
 ## Repository structure
 
 ```text
 preprocessing/          Original preprocessing code and setup guide
 training/               Original training code and setup guide
-predict.py               Minimal checkpoint inference
-weights/                 Selected trained model and checksums
+weights/                 Trained model, prediction script and usage guide
 experiments/             Historical scripts, eight logs and six figures
 docs/                    Method, model card, results and provenance
 ```

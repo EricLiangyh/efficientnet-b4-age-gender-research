@@ -37,18 +37,17 @@
 
 ```powershell
 python -m pip install -r requirements.txt
-python predict.py --image path/to/face_crop.jpg
+python weights/predict.py --image path/to/face_crop.jpg
 ```
 
-输入是已裁剪的人脸图片。`predict.py` 仅执行预测，不自动检测人脸，也不计算准确率。标签 0/1 对应数据集的 male/female 标注，不能等同于对个人性别身份的判断。
+输入是已裁剪的人脸图片。`weights/predict.py` 仅执行预测，不自动检测人脸，也不计算准确率。标签 0/1 对应数据集的 male/female 标注，不能等同于对个人性别身份的判断。
 
 ## 精简目录
 
 ```text
 preprocessing/          原始预处理代码与配置说明
 training/               原始训练代码与配置说明
-predict.py               单文件推理入口
-weights/                 已训练模型和校验信息
+weights/                 模型权重、预测代码与使用说明
 experiments/             历史实验脚本、八组日志、六张图
 docs/                    方法、模型卡、结果与来源说明
 ```

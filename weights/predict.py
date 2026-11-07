@@ -1,6 +1,6 @@
 """Load the archived B4 checkpoint and predict an already-cropped face.
 
-Usage: python predict.py --image path/to/face_crop.jpg
+Usage: python weights/predict.py --image path/to/face_crop.jpg
 Training and preprocessing remain in the two original scripts.
 """
 import argparse
@@ -31,7 +31,7 @@ class AgeGenderModel(nn.Module):
 def main():
     parser = argparse.ArgumentParser(description='Age/gender prediction for a cropped face; no face detection')
     parser.add_argument('--image', required=True)
-    parser.add_argument('--checkpoint', default=str(Path(__file__).resolve().parent / 'weights/efficientnet_b4_c3_epoch35.pth'))
+    parser.add_argument('--checkpoint', default=str(Path(__file__).resolve().parent / 'efficientnet_b4_c3_epoch35.pth'))
     parser.add_argument('--device', default='cpu')
     args = parser.parse_args()
     model = AgeGenderModel()
