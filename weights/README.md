@@ -6,7 +6,6 @@
 | --- | --- |
 | [efficientnet_b4_c3_epoch35.pth](efficientnet_b4_c3_epoch35.pth) | 选定的 C3 第 35 轮 B4 参数，约 71 MB |
 | [predict.py](predict.py) | 加载同目录权重，预测一张已裁剪人脸图片 |
-| [example_face.jpg](example_face.jpg) | 项目所有者提供并授权展示的原始照片，推理前需裁剪人脸 |
 | [manifest.json](manifest.json) | 文件大小、SHA256，以及另一历史权重的区别 |
 
 权重按目录来源关联 [C3 训练脚本](../experiments/legacy/b4_35.py) 与 [日志](../experiments/logs/b4_35.csv)。原始全数据 `training/train_pro.py` 是另一版本，不能直接认定为本权重的生成代码。
@@ -19,8 +18,6 @@
 python -m pip install -r requirements.txt
 python weights/predict.py --image "path/to/face_crop.jpg" --device cpu
 ```
-
-示例照片保留原图，包含上半身和背景。请先在本地工作副本中裁出单张完整人脸再运行，不要直接把原图当作已对齐人脸。此照片没有附实测预测结果或真实标签。
 
 试用真实图片时，将 `path/to/face_crop.jpg` 替换为自己有权使用的人脸裁剪图片路径；路径包含空格时加双引号。默认使用 CPU，在配置好 CUDA 的环境中可指定 `--device cuda`。默认权重按脚本所在目录查找；使用其他同结构权重时，可通过 `--checkpoint` 指定文件。
 

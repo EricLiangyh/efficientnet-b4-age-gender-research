@@ -25,7 +25,3 @@ Historical comparison scripts preserve original experimental behavior, including
 The only standalone supporting utility is `weights/predict.py`, which loads the selected B4 checkpoint for cropped-face inference. Existing figures are retained alongside their source CSV logs; no standalone plotting script is included.
 
 No original dataset or split-membership manifest is included. No full-dataset reevaluation or full research retraining was performed while preparing this repository.
-
-## Authorized example photograph
-
-`weights/example_face.jpg` was supplied by the project owner, who confirmed permission to use it in this repository. It is copied unchanged from the supplied image, not a dataset sample. The image is an uncropped input reference; inference requires a prepared face crop. No measured prediction output or ground-truth labels are attached. This display permission is not a general image reuse license.

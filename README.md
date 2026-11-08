@@ -79,22 +79,6 @@ python -m venv .venv
 
 On Linux/macOS replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. For CUDA, choose a matching PyTorch build before running inference. Model initialization uses the included checkpoint and does not download ImageNet weights.
 
-### Authorized photograph example
-
-<img src="weights/example_face.jpg" alt="User-authorized example photograph, original uncropped image" width="180" />
-
-This photograph was supplied by the project owner with permission to display it in this repository. The original image is preserved unchanged. It includes the upper body and background: crop a single complete face with a small forehead/chin margin before inference, and save your working crop locally as `face_crop.jpg`. Resizing to 380×380 is automatic.
-
-No measured predictions or ground-truth labels are attached to this photograph. The photograph is an input reference, not an accuracy benchmark. Display permission does not grant a general reuse license to visitors.
-
-Run the prediction command on your prepared face crop:
-
-
-
-```powershell
-.\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
-```
-
 Use one complete face with a small margin around the forehead and chin, not an uncropped group photo. Resizing is automatic; face detection is not included. [Input and output guide](weights/README.md).
 
 ## Scope and next research steps
@@ -106,7 +90,7 @@ Next steps are identity-aware deduplication and frozen split manifests, an untou
 ```text
 preprocessing/   Original preprocessing and configuration guide
 training/        Original training and parameter guide
-weights/         Selected checkpoint, prediction code and example
+weights/         Selected checkpoint and prediction code
 experiments/     Historical scripts, eight logs and six figures
 docs/            Method, results, model card and provenance
 ```

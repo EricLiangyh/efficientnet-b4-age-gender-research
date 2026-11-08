@@ -79,22 +79,6 @@ python -m venv .venv
 
 Linux/macOS 将 `.\.venv\Scripts\python.exe` 换为 `.venv/bin/python`。使用 GPU 时先准备匹配的 PyTorch/CUDA 环境。预测直接加载仓库权重，不另外下载 ImageNet 初始化参数。
 
-### 已授权的照片示例
-
-<img src="weights/example_face.jpg" alt="用户授权展示的示例照片，保留未裁剪原图" width="180" />
-
-照片由项目所有者提供，并已确认可用于本仓库展示；文件保持原样，未修改人物或图像内容。原图包含上半身和背景，推理前需裁出一张完整人脸，保留少量额头、下巴边缘，将工作副本保存为本地 `face_crop.jpg`。不必手动缩放到 380×380。
-
-本照片未附实测预测结果或真实标签。此图用于说明输入准备，不作为准确率证据。展示授权不代表访客获得通用转载许可。
-
-准备好裁剪图后运行：
-
-
-
-```powershell
-.\.venv\Scripts\python.exe weights/predict.py --image "path/to/face_crop.jpg" --device cpu
-```
-
 图片应以一张完整人脸为主体，保留适当额头、下巴边缘；不要直接输入整张多人合照。尺寸由程序自动调整，不含自动人脸检测。详见 [模型使用说明](weights/README.md)。
 
 ## 研究边界与下一步
@@ -106,7 +90,7 @@ Linux/macOS 将 `.\.venv\Scripts\python.exe` 换为 `.venv/bin/python`。使用 
 ```text
 preprocessing/   原始预处理与配置说明
 training/        原始训练与参数说明
-weights/         选定权重、预测代码和输入输出示例
+weights/         选定权重与预测代码
 experiments/     历史脚本、八组日志与六张图
 docs/            方法、结果、模型卡与来源
 ```
